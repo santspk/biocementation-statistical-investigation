@@ -233,7 +233,7 @@ for name, cols in MODELS.items():
     y_te = df_te[y_col].astype(float).values
     y_pred = res.predict(X_te)
 
-    # 1️⃣ Plot Predicted vs Measured UCS (TEST)
+    #  Plot Predicted vs Measured UCS (TEST)
     fig, ax = plt.subplots(figsize=(7.5, 5.5), dpi=200)
     ax.scatter(y_te, y_pred, s=22, alpha=0.8)
     lims = [min(y_te.min(), y_pred.min()), max(y_te.max(), y_pred.max())]
@@ -250,12 +250,12 @@ for name, cols in MODELS.items():
     fig.savefig(os.path.join(out_dir, f"{name}_Predicted_vs_Measured_TEST.png"))
     plt.close(fig)
 
-    # 2️⃣ Model F-test significance
+    #  Model F-test significance
     F_val = res.fvalue
     F_p = res.f_pvalue
     signif = "Significant (p<0.05)" if F_p < 0.05 else "Not Significant"
 
-    # 3️⃣ Residual variance sigma^2
+    #  Residual variance sigma^2
     n = X_tr.shape[0]
     p = X_tr.shape[1]
     sigma2 = np.sum(res.resid**2) / (n - p)
@@ -379,3 +379,4 @@ ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
 fig.tight_layout()
 fig.savefig(os.path.join(out_dir, "UCS_vs_Carbonate_with_M1_CI_PI_min_axis_zero_max_UCS_10000_log.png"))
 plt.close(fig)
+
